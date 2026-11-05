@@ -833,7 +833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &308718044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7332,7 +7332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2856856e988ee6249989cf7a88eb6b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
-  pausePanel: {fileID: 0}
+  pausePanel: {fileID: 308718043}
 --- !u!4 &1716548363
 Transform:
   m_ObjectHideFlags: 0
