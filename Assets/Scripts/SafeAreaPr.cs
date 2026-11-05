@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
-public class SafeArea : MonoBehaviour
+public class SafeAreaPr : MonoBehaviour
 {
     RectTransform panel;
     Rect last;
