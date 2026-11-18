@@ -3146,12 +3146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FireRain
   bossBulletPrefab: {fileID: 4160258293304042537, guid: 62ac0f6d19558e2429eb6e51991dfc8e, type: 3}
   warningPrefab: {fileID: 6451734985300736702, guid: 519a1c8256be26a4b93a6fb9d9232e58, type: 3}
-  warningTime: 1.5
-  interval: 4
-  minX: -10.3
-  maxX: 22.5
-  groundY: -0.2
-  spawnHeight: 8
+  stats: {fileID: 11400000, guid: 700ae10d8a914d56b307941e69945bac, type: 2}
 --- !u!1 &968926385
 GameObject:
   m_ObjectHideFlags: 0
@@ -4483,6 +4478,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261129740}
   m_CullTransparentMesh: 1
+--- !u!1 &1267515602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1267515604}
+  - component: {fileID: 1267515603}
+  m_Layer: 0
+  m_Name: LevelController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1267515603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267515602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e427e73d09804b0590edaab5e30734ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelController
+  level: {fileID: 11400000, guid: 1e0f66e03d4343a89977de8a80c4811d, type: 2}
+--- !u!4 &1267515604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267515602}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.16343, y: -1.96985, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1267586336
 GameObject:
   m_ObjectHideFlags: 0
@@ -4592,6 +4632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c3465cd842b9149b9701aefc241f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossHealth
+  stats: {fileID: 11400000, guid: 700ae10d8a914d56b307941e69945bac, type: 2}
   hp: 8
   hpText: {fileID: 867236197}
 --- !u!50 &1267586341
@@ -4634,7 +4675,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossAttack
   projectilePrefab: {fileID: 4160258293304042537, guid: 62ac0f6d19558e2429eb6e51991dfc8e, type: 3}
-  distance: 0.7
 --- !u!95 &1267586343
 Animator:
   serializedVersion: 7
@@ -8134,8 +8174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player2D
   portal: {fileID: 0}
-  speed: 7
-  jumpForce: 11
+  stats: {fileID: 11400000, guid: 18b0b20e667d4c6db1797f60f633bdf1, type: 2}
   coinsText: {fileID: 0}
   survivalTimer: {fileID: 0}
   pickupClip: {fileID: 8300000, guid: 66005a4930e33cb46b73d223ff7d6ad0, type: 3}
@@ -8174,7 +8213,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooter
   bulletPrefab: {fileID: 8842144129635380519, guid: 0a9c837e6b4f6654a9b339fd76d8ec5d, type: 3}
-  cooldown: 0.3
   shootClip: {fileID: 8300000, guid: 293e0df3693481f40b8548ab82071ee6, type: 3}
 --- !u!114 &2015368658
 MonoBehaviour:
@@ -8801,6 +8839,7 @@ SceneRoots:
   - {fileID: 1221006319}
   - {fileID: 195889335}
   - {fileID: 1956562149}
+  - {fileID: 1267515604}
   - {fileID: 1230083188}
   - {fileID: 40620708}
   - {fileID: 1952091721}

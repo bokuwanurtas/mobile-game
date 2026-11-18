@@ -247,18 +247,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ff841e157549e409d78c6ec67de346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChargerEnemy
-  visionRange: 6
-  visionAngle: 120
+  stats: {fileID: 11400000, guid: b9a2d8f3f301440f93530f642041a8e2, type: 2}
   eyeHeight: 0.3
   artFacesRight: 1
   telegraphColor: {r: 1, g: 0, b: 0, a: 1}
   windupClip: {fileID: 8300000, guid: 66005a4930e33cb46b73d223ff7d6ad0, type: 3}
-  windup: 0.7
-  chargeSpeed: 9
-  chargeTime: 0.8
-  stunTime: 1.5
-  damage: 1
-  turnInterval: 2.5
 --- !u!60 &-1233200545616416198
 PolygonCollider2D:
   m_ObjectHideFlags: 0

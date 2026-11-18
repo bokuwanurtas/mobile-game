@@ -207,3 +207,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d58130013f753d4cb763baae7a19d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Heart
+  stats: {fileID: 11400000, guid: e364a728b09f46e8a380d3e5da968d5d, type: 2}

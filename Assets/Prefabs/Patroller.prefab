@@ -247,21 +247,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa4e3173fa55304aa61f536e5798d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PatrollerEnemy
-  visionRange: 6
-  visionAngle: 120
+  stats: {fileID: 11400000, guid: 418c9a04fb0745a3a9a20094a87a6aa8, type: 2}
   eyeHeight: 0.3
   artFacesRight: 1
   telegraphColor: {r: 1, g: 0, b: 0, a: 1}
   windupClip: {fileID: 8300000, guid: 66005a4930e33cb46b73d223ff7d6ad0, type: 3}
-  patrolSpeed: 1.5
-  chaseSpeed: 3
   waypoints: []
-  patrolRange: 3
-  attackRange: 1.2
-  windup: 0.6
-  cooldown: 1.5
-  damage: 1
-  loseSightTime: 2
 --- !u!60 &5698968976317324255
 PolygonCollider2D:
   m_ObjectHideFlags: 0

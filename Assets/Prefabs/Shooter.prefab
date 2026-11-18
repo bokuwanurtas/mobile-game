@@ -248,21 +248,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d173394f247ae458281f2031c6b9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShooterEnemy
-  visionRange: 6
-  visionAngle: 120
+  stats: {fileID: 11400000, guid: 0b01df3e2197405185602e3412f22006, type: 2}
   eyeHeight: 0.3
   artFacesRight: 1
   telegraphColor: {r: 1, g: 0, b: 0, a: 1}
   windupClip: {fileID: 8300000, guid: 66005a4930e33cb46b73d223ff7d6ad0, type: 3}
   projectilePrefab: {fileID: 4160258293304042537, guid: 62ac0f6d19558e2429eb6e51991dfc8e, type: 3}
   shootClip: {fileID: 8300000, guid: 293e0df3693481f40b8548ab82071ee6, type: 3}
-  aimTime: 0.6
-  cooldown: 1.6
-  projectileSpeed: 6
-  projectileLife: 3
-  turnInterval: 2.5
   aimLine: {fileID: 5313779211530372905}
-  aimLineLength: 6
 --- !u!60 &-8736976214491655767
 PolygonCollider2D:
   m_ObjectHideFlags: 0

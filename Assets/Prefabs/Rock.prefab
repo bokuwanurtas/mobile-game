@@ -279,3 +279,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb11563778c3ef49aa2cdbbecb6adc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rock
+  stats: {fileID: 11400000, guid: e364a728b09f46e8a380d3e5da968d5d, type: 2}

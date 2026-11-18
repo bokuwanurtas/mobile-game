@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "2DPhysics backUp.slnx"
+    "dotnet.defaultSolution": "assignment11.slnx"
 }

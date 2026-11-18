@@ -184,3 +184,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8446db6d3c54f7f4892d4513b7963e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BombHazard
+  stats: {fileID: 11400000, guid: e364a728b09f46e8a380d3e5da968d5d, type: 2}
