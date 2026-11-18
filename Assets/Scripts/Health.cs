@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public int hp = 3;
+    public int hp;
+    PlayerStats stats;
 
     bool invincible;
     SpriteRenderer sr;
@@ -22,6 +23,8 @@ public class Health : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         src = GetComponent<AudioSource>();
+        stats = GetComponent<Player2D>().stats;
+        hp = stats.maxHp;
         UpdateHearts();
     }
 
@@ -48,10 +51,10 @@ public class Health : MonoBehaviour
     {
         invincible = true;
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < stats.blinkCount; i++)
         {
             sr.enabled = !sr.enabled;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(stats.blinkDelay);
         }
 
         sr.enabled = true;

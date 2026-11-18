@@ -4,9 +4,12 @@ public class Spawner : MonoBehaviour
 {
     public Hazard[] prefabs;
 
+    LevelData level;
+
     void Start()
     {
-        InvokeRepeating(nameof(Spawn), 1f, 2f);
+        level = LevelController.instance.level;
+        InvokeRepeating(nameof(Spawn), level.spawnFirstDelay, level.spawnInterval);
     }
 
     void Spawn()
@@ -15,7 +18,7 @@ public class Spawner : MonoBehaviour
 
         Instantiate(
             pick,
-            new Vector3(Random.Range(-9.48f, 16.88f), 6f, 0),
+            new Vector3(Random.Range(level.spawnMinX, level.spawnMaxX), level.spawnY, 0),
             Quaternion.identity
         );
     }

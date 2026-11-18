@@ -9,15 +9,9 @@ public class ShooterEnemy : EnemyBase
     [Header("Attack")]
     public GameObject projectilePrefab;   // префаб BossBullets
     public AudioClip shootClip;
-    public float aimTime = 0.6f;
-    public float cooldown = 1.6f;
-    public float projectileSpeed = 6f;
-    public float projectileLife = 3f;
-    public float turnInterval = 2.5f;     // как часто разворачивается в Idle
 
     [Header("Aim line")]
     public LineRenderer aimLine;
-    public float aimLineLength = 6f;
 
     Vector2 aimDir;
     float timer;
@@ -46,7 +40,7 @@ public class ShooterEnemy : EnemyBase
                 if (timer <= 0)
                 {
                     Face(-facing);
-                    timer = turnInterval;
+                    timer = stats.turnInterval;
                 }
                 if (CanSeePlayer()) SetState(State.Aim);
                 break;
@@ -72,14 +66,14 @@ public class ShooterEnemy : EnemyBase
         Telegraph(s == State.Aim);
         if (aimLine != null) aimLine.enabled = (s == State.Aim);
 
-        if (s == State.Idle) timer = turnInterval;
-        if (s == State.Cooldown) timer = cooldown;
+        if (s == State.Idle) timer = stats.turnInterval;
+        if (s == State.Cooldown) timer = stats.cooldown;
         if (s == State.Aim)
         {
             // направление фиксируем в начале прицеливания: игрок успевает уйти
             aimDir = (player.position - EyePos()).normalized;
             Face(aimDir.x >= 0 ? 1 : -1);
-            timer = aimTime;
+            timer = stats.aimTime;
         }
     }
 
@@ -92,7 +86,7 @@ public class ShooterEnemy : EnemyBase
     {
         if (aimLine == null) return;
         aimLine.SetPosition(0, EyePos());
-        aimLine.SetPosition(1, EyePos() + (Vector3)(aimDir * aimLineLength));
+        aimLine.SetPosition(1, EyePos() + (Vector3)(aimDir * stats.aimLineLength));
     }
 
     void Fire()
@@ -102,9 +96,10 @@ public class ShooterEnemy : EnemyBase
 
         BossProjectile p = b.GetComponent<BossProjectile>();
         p.direction = aimDir;
-        p.speed = projectileSpeed;
+        p.speed = stats.projectileSpeed;
+        p.damage = stats.damage;
 
-        Destroy(b, projectileLife);
+        Destroy(b, stats.projectileLife);
         Play(shootClip);
     }
 }

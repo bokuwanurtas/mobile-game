@@ -6,14 +6,6 @@ public class ChargerEnemy : EnemyBase
     enum State { Idle, Windup, Charge, Stunned }
     State state = State.Idle;
 
-    [Header("Attack")]
-    public float windup = 0.7f;
-    public float chargeSpeed = 9f;
-    public float chargeTime = 0.8f;
-    public float stunTime = 1.5f;
-    public int damage = 1;
-    public float turnInterval = 2.5f;
-
     float timer;
     int chargeDir;
 
@@ -35,7 +27,7 @@ public class ChargerEnemy : EnemyBase
                 if (timer <= 0)
                 {
                     Face(-facing);
-                    timer = turnInterval;
+                    timer = stats.turnInterval;
                 }
                 if (CanSeePlayer()) SetState(State.Windup);
                 break;
@@ -46,9 +38,9 @@ public class ChargerEnemy : EnemyBase
                 break;
 
             case State.Charge:
-                rb.linearVelocity = new Vector2(chargeDir * chargeSpeed, rb.linearVelocity.y);
+                rb.linearVelocity = new Vector2(chargeDir * stats.chargeSpeed, rb.linearVelocity.y);
 
-                bool hitWall = chargeTime - timer > 0.15f && Mathf.Abs(rb.linearVelocity.x) < 0.5f;
+                bool hitWall = stats.chargeTime - timer > 0.15f && Mathf.Abs(rb.linearVelocity.x) < 0.5f;
                 if (timer <= 0 || hitWall) SetState(State.Stunned);
                 break;
 
@@ -64,14 +56,14 @@ public class ChargerEnemy : EnemyBase
         state = s;
         Telegraph(s == State.Windup);
 
-        if (s == State.Idle) timer = turnInterval;
-        if (s == State.Stunned) timer = stunTime;
-        if (s == State.Charge) timer = chargeTime;
+        if (s == State.Idle) timer = stats.turnInterval;
+        if (s == State.Stunned) timer = stats.stunTime;
+        if (s == State.Charge) timer = stats.chargeTime;
         if (s == State.Windup)
         {
             FaceTowards(player.position.x);
             chargeDir = facing;               // направление рывка фиксируем в начале замаха
-            timer = windup;
+            timer = stats.windup;
         }
     }
 
@@ -80,7 +72,7 @@ public class ChargerEnemy : EnemyBase
     {
         if (state == State.Charge && other.gameObject.CompareTag("Player"))
         {
-            DamagePlayer(damage);
+            DamagePlayer(stats.damage);
             SetState(State.Stunned);
         }
     }

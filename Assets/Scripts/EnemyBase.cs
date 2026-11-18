@@ -4,8 +4,7 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     [Header("Vision")]
-    public float visionRange = 6f;                 // меньше, чем пол-экрана, чтобы не бить из-за кадра
-    [Range(10, 360)] public float visionAngle = 120f;
+    public EnemyStats stats;                       // ChargerStats / PatrollerStats / ShooterStats
     public float eyeHeight = 0.3f;
 
     [Header("Look")]
@@ -46,10 +45,10 @@ public class EnemyBase : MonoBehaviour
         Vector2 eye = (Vector2)transform.position + Vector2.up * eyeHeight;
         Vector2 toPlayer = (Vector2)player.position - eye;
 
-        if (toPlayer.magnitude > visionRange) return false;
-        if (Vector2.Angle(Vector2.right * facing, toPlayer) > visionAngle / 2f) return false;
+        if (toPlayer.magnitude > stats.visionRange) return false;
+        if (Vector2.Angle(Vector2.right * facing, toPlayer) > stats.visionAngle / 2f) return false;
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(eye, toPlayer, visionRange);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(eye, toPlayer, stats.visionRange);
         foreach (RaycastHit2D hit in hits)
         {
             if (hit.collider.isTrigger) continue;                    // монеты, пули
@@ -96,11 +95,13 @@ public class EnemyBase : MonoBehaviour
     // Жёлтый конус зрения (выдели врага в сцене)
     void OnDrawGizmosSelected()
     {
+        if (stats == null) return;
+
         Gizmos.color = Color.yellow;
         Vector3 eye = transform.position + Vector3.up * eyeHeight;
         Vector3 forward = Vector3.right * facing;
-        float half = visionAngle / 2f;
-        Gizmos.DrawLine(eye, eye + Quaternion.Euler(0, 0, half) * forward * visionRange);
-        Gizmos.DrawLine(eye, eye + Quaternion.Euler(0, 0, -half) * forward * visionRange);
+        float half = stats.visionAngle / 2f;
+        Gizmos.DrawLine(eye, eye + Quaternion.Euler(0, 0, half) * forward * stats.visionRange);
+        Gizmos.DrawLine(eye, eye + Quaternion.Euler(0, 0, -half) * forward * stats.visionRange);
     }
 }

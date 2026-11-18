@@ -3,10 +3,13 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     public GameObject explosionPrefab;
-    
+
+    ItemStats stats;
+
     void Start()
     {
-        Invoke(nameof(Explode), 2f);   
+        stats = GetComponent<Hazard>().stats;
+        Invoke(nameof(Explode), stats.bombFuseTime);
     }
 
     void Explode()
@@ -14,7 +17,7 @@ public class Bomb : MonoBehaviour
         // здесь: анимация взрыва, звук, урон вокруг (урок 9 и A7)
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
-        Destroy(explosion, 0.7f);
+        Destroy(explosion, stats.explosionTime);
         Destroy(gameObject);
     }
 }

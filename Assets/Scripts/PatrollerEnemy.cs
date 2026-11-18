@@ -7,17 +7,7 @@ public class PatrollerEnemy : EnemyBase
     State state = State.Patrol;
 
     [Header("Movement")]
-    public float patrolSpeed = 1.5f;
-    public float chaseSpeed = 3f;
     public Transform[] waypoints;      // точки патруля (отдельные объекты в сцене)
-    public float patrolRange = 3f;     // если точек нет: ходим +- от старта
-
-    [Header("Attack")]
-    public float attackRange = 1.2f;
-    public float windup = 0.6f;
-    public float cooldown = 1.5f;
-    public int damage = 1;
-    public float loseSightTime = 2f;   // сколько ещё ищем игрока после потери
 
     float[] stops;
     int stopIndex;
@@ -34,7 +24,7 @@ public class PatrollerEnemy : EnemyBase
         }
         else
         {
-            stops = new float[] { transform.position.x - patrolRange, transform.position.x + patrolRange };
+            stops = new float[] { transform.position.x - stats.patrolRange, transform.position.x + stats.patrolRange };
         }
     }
 
@@ -49,16 +39,16 @@ public class PatrollerEnemy : EnemyBase
         switch (state)
         {
             case State.Patrol:
-                if (Walk(stops[stopIndex], patrolSpeed))
+                if (Walk(stops[stopIndex], stats.patrolSpeed))
                     stopIndex = (stopIndex + 1) % stops.Length;
                 if (sees) SetState(State.Chase);
                 break;
 
             case State.Chase:
-                Walk(lastSeenX, chaseSpeed);
-                if (sees) timer = loseSightTime;
+                Walk(lastSeenX, stats.chaseSpeed);
+                if (sees) timer = stats.loseSightTime;
 
-                if (sees && Vector2.Distance(transform.position, player.position) <= attackRange)
+                if (sees && Vector2.Distance(transform.position, player.position) <= stats.attackRange)
                     SetState(State.Windup);
                 else if (timer <= 0)
                     SetState(State.Patrol);
@@ -86,21 +76,21 @@ public class PatrollerEnemy : EnemyBase
         state = s;
         Telegraph(s == State.Windup);
 
-        if (s == State.Chase) timer = loseSightTime;
-        if (s == State.Cooldown) timer = cooldown;
+        if (s == State.Chase) timer = stats.loseSightTime;
+        if (s == State.Cooldown) timer = stats.cooldown;
         if (s == State.Windup)
         {
             Stop();
             FaceTowards(player.position.x);
-            timer = windup;
+            timer = stats.windup;
         }
     }
 
     // Удар попадает, только если игрок не успел отойти
     void Strike()
     {
-        if (Vector2.Distance(transform.position, player.position) <= attackRange)
-            DamagePlayer(damage);
+        if (Vector2.Distance(transform.position, player.position) <= stats.attackRange)
+            DamagePlayer(stats.damage);
     }
 
     // Идём к targetX. true = дошли

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class Shooter : MonoBehaviour
 {
     public GameObject bulletPrefab; // перетащи префаб пули в инспекторе
-    public float cooldown = 0.3f;   
+    PlayerStats stats;
     float nextShot;                 // время, когда можно стрелять снова
 
     SpriteRenderer sr;
@@ -17,6 +17,7 @@ public class Shooter : MonoBehaviour
 
     void Start()
     {
+        stats = GetComponent<Player2D>().stats;
         sr = GetComponent<SpriteRenderer>();
         src = GetComponent<AudioSource>();
         playerInput = GetComponent<PlayerInput>();
@@ -26,13 +27,14 @@ public class Shooter : MonoBehaviour
     void Update()
     {
         if (fireAction.WasPressedThisFrame() && Time.time >= nextShot){
-            nextShot = Time.time + cooldown;
+            nextShot = Time.time + stats.shootCooldown;
 
             Quaternion rotation = sr.flipX
                 ? Quaternion.Euler(0, 0, 180)
                 : Quaternion.identity;
 
-            Instantiate(bulletPrefab, transform.position, rotation);
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
+            bullet.GetComponent<Bullet>().stats = stats;
             src.PlayOneShot(shootClip);
         }
     }

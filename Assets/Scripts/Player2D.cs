@@ -8,10 +8,10 @@ public class Player2D : MonoBehaviour
 
     public GameObject portal;
 
-    public float speed = 7f;
+    public PlayerStats stats;   // PlayerStats.asset
     private Rigidbody2D rb;
 
-    public float jumpForce = 12f;
+    private float jumpForce;    // берётся из LevelData
     private bool onGround;
 
     private Animator anim;
@@ -33,6 +33,7 @@ public class Player2D : MonoBehaviour
     void Start()
     {
         coinsTotal = GameObject.FindGameObjectsWithTag("Coin").Length;
+        jumpForce = LevelController.instance.level.jumpForce;
 
         if (portal != null){
             portal.SetActive(false);
@@ -68,6 +69,7 @@ public class Player2D : MonoBehaviour
             }
             else
             {
+                LevelController.instance.CompleteLevel(coins * stats.coinPoints);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
         }
@@ -125,7 +127,7 @@ public class Player2D : MonoBehaviour
     {
         float x = moveAction.ReadValue<Vector2>().x;
 
-        rb.linearVelocity = new Vector2(x * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(x * stats.speed, rb.linearVelocity.y);
 
         anim.SetBool("isRunning", x != 0);
 
@@ -143,7 +145,7 @@ public class Player2D : MonoBehaviour
 
     void CheckFall()
     {
-        if (transform.position.y < -15f)
+        if (transform.position.y < stats.fallLimitY)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }

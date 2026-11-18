@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class BossProjectile : MonoBehaviour
 {
-    public float speed = 7f;
+    public float speed;     // ставит тот, кто создаёт пулю
+    public int damage;      // тоже
     public Vector2 direction = Vector2.left;
 
     Rigidbody2D rb;
@@ -23,7 +24,7 @@ public class BossProjectile : MonoBehaviour
 
             if (health != null)
             {
-                health.TakeDamage(1);
+                health.TakeDamage(damage);
             }
 
             Destroy(gameObject);

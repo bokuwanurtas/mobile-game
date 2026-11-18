@@ -3,11 +3,16 @@ using System;
 
 public class SurvivalTimer : MonoBehaviour
 {
-    public float goal = 60f;
+    public float goal;   // берётся из LevelData
     float t;
     bool won;
 
     public bool TimeCompleted => won;
+
+    void Start()
+    {
+        goal = LevelController.instance.level.survivalTime;
+    }
 
     void Update()
     {

@@ -6,33 +6,27 @@ public class FireRain : MonoBehaviour
     public GameObject bossBulletPrefab;
     public GameObject warningPrefab;
 
-    public float warningTime = 1.5f;
-    public float interval = 4f;
-
-    public float minX = -10.3f;
-    public float maxX = 22.5f;
-    public float groundY = 5f;
-    public float spawnHeight = 8f;
+    public BossStats stats;   // BossStats.asset
 
     IEnumerator Start()
     {
         while (true)
         {
-            float x = Random.Range(minX, maxX);
+            float x = Random.Range(stats.fireMinX, stats.fireMaxX);
 
             GameObject warning = Instantiate(
                 warningPrefab,
-                new Vector3(x, groundY, 0),
+                new Vector3(x, stats.fireGroundY, 0),
                 Quaternion.identity
             );
 
-            yield return new WaitForSeconds(warningTime);
+            yield return new WaitForSeconds(stats.fireWarningTime);
 
             Destroy(warning);
 
             GameObject bullet = Instantiate(
                 bossBulletPrefab,
-                new Vector3(x, spawnHeight, 0),
+                new Vector3(x, stats.fireSpawnHeight, 0),
                 Quaternion.identity
             );
 
@@ -40,6 +34,7 @@ public class FireRain : MonoBehaviour
 
             if (projectile != null)
             {
+                projectile.damage = stats.bulletDamage;
                 projectile.enabled = false;
             }
 
@@ -48,10 +43,10 @@ public class FireRain : MonoBehaviour
             if (rb != null)
             {
                 rb.gravityScale = 0;
-                rb.linearVelocity = Vector2.down * 7f;
+                rb.linearVelocity = Vector2.down * stats.fireFallSpeed;
             }
 
-            yield return new WaitForSeconds(interval);
+            yield return new WaitForSeconds(stats.fireInterval);
         }
     }
 }

@@ -4,10 +4,12 @@ using TMPro;
 
 public class BossHealth : MonoBehaviour
 {
-    public int hp = 8;
+    public BossStats stats;   // BossStats.asset
+    public int hp;
     public TextMeshProUGUI hpText;
 
     public void Start(){
+        hp = stats.maxHp;
         UpdateHP();
     }
     public void TakeDamage(int damage)
@@ -17,10 +19,11 @@ public class BossHealth : MonoBehaviour
 
         if (hp <= 0)
         {
+            LevelController.instance.CompleteLevel(stats.killScore);
             SceneManager.LoadScene("WinScreen");
         }
     }
     public void UpdateHP(){
-        hpText.text = "Boss HP: " + hp + "/8";
+        hpText.text = "Boss HP: " + hp + "/" + stats.maxHp;
     }
 }

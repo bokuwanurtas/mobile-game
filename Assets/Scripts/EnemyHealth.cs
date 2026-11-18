@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int hp = 2;
+    public int hp;
     public AudioClip hitClip;
 
     SpriteRenderer sr;
+    EnemyStats stats;
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        stats = GetComponent<EnemyBase>().stats;
+        hp = stats.maxHp;
     }
 
     public void TakeDamage(int dmg)
@@ -32,7 +35,7 @@ public class EnemyHealth : MonoBehaviour
     IEnumerator Blink()
     {
         sr.enabled = false;
-        yield return new WaitForSeconds(0.06f);
+        yield return new WaitForSeconds(stats.hitBlinkTime);
         sr.enabled = true;
     }
 }

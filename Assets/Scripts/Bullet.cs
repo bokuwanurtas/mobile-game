@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public PlayerStats stats;   // ставит Shooter при выстреле
+
     void Start()
     {
-        GetComponent<Rigidbody2D>().linearVelocity = transform.right * 12f;
-        Destroy(gameObject, 3f);      // пуля сама умрёт через 3 секунды
+        GetComponent<Rigidbody2D>().linearVelocity = transform.right * stats.bulletSpeed;
+        Destroy(gameObject, stats.bulletLifetime);      // пуля сама умрёт через 3 секунды
     }
 
 
@@ -15,7 +17,7 @@ public class Bullet : MonoBehaviour
 
         if (boss != null)
         {
-            boss.TakeDamage(1);
+            boss.TakeDamage(stats.bulletDamage);
             Destroy(gameObject);
             return;
         }
@@ -24,7 +26,7 @@ public class Bullet : MonoBehaviour
 
         if (enemy != null)
         {
-            enemy.TakeDamage(1);
+            enemy.TakeDamage(stats.bulletDamage);
             Destroy(gameObject);
         }
     }
